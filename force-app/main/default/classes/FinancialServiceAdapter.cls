@@ -5,7 +5,7 @@
  * @last modified on  : 01-09-2026
  * @last modified by  : Kharylin Dias
  **/
-public with sharing class FinancialServiceAdapter implements System.Callable {
+global with sharing class FinancialServiceAdapter implements System.Callable { // org limitada para fazer a configuração correta para a IP visualizar a classe, portanto terá que ficar como global mesmo não sendo o ideal
     
     // O OmniStudio vai chamar esse método genérico "call"
     public Object call(String action, Map<String, Object> args) {
@@ -28,9 +28,9 @@ public with sharing class FinancialServiceAdapter implements System.Callable {
     private Boolean calcularParcela(Map<String, Object> input, Map<String, Object> output) {
         try {
             // 1. Desempacota os dados do JSON (Input do IP)
-            Decimal valor = (Decimal) input.get('valorEmprestimo');
-            Decimal taxa = (Decimal) input.get('taxaJurosAnual');
-            Integer meses = Integer.valueOf(input.get('meses'));
+            Decimal valor = Decimal.valueOf(String.valueOf(input.get('valorEmprestimo')));
+            Decimal taxa = Decimal.valueOf(String.valueOf(input.get('taxaJurosAnual')));
+            Integer meses = Integer.valueOf(String.valueOf(input.get('meses')));
             
             // 2. Chama o Motor Matemático (Sua classe de ontem)
             Decimal valorParcela = FinancialService.calcularParcela(valor, taxa, meses);
