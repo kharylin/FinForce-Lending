@@ -1,0 +1,51 @@
+<!--
+  @description       : 
+  @author            : Kharylin Dias
+  @group             : 
+  @last modified on  : 01-09-2026
+  @last modified by  : Kharylin Dias
+-->
+<template>
+
+    <lightning-card title="Simulador Empréstimo - FinForce Lending"
+        icon-name="utility:moneybag">
+
+        <!-- Slider valor -->
+        <div class="slds-p-around_medium">
+
+            <lightning-slider
+                label="Valor Solicitado"
+                size="medium"
+                min="1000"
+                max="50000"
+                step="500"
+                value={sliderValorSolicitado}
+                onchange={handleSliderValorChange}>
+            </lightning-slider>
+            <template if:true={sliderValorSolicitado}>
+                <p>Valor selecionado: {sliderValorSolicitado}</p>
+            </template>
+            <!-- slider parcelas -->
+            <div class="slds-p-around_medium">
+
+                <lightning-slider
+                    label="Quantidade de Parcelas"
+                    size="medium"
+                    min="6"
+                    max="60"
+                    value={sliderQtdParcelas}
+                    onchange={handleSliderParcelaChange}>
+                </lightning-slider>
+
+                <template if:true={sliderQtdParcelas}>
+                    <p>Quantidade de parcela selecionada:
+                        {sliderQtdParcelas}</p>
+                </template>
+            </div>
+            <!-- botão calcular valor -->
+            <lightning-button variant="brand" label="Calcular Valor"
+                title="Calcular Valor" onclick={calcular}
+                class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>
