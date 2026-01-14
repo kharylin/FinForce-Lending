@@ -2,20 +2,20 @@
  * @description       : Classe utilitária responsável pela lógica matemática financeira do projeto
  * @author            : Kharylin Dias
  * @group             : FinForce Lending
- * @last modified on  : 01-09-2026
+ * @last modified on  : 01-12-2026
  * @last modified by  : Kharylin Dias
  * Fórmula Tabela Price: PMT = PV * ( i * (1+i)^n ) / ( (1+i)^n - 1 )
  **/
 
 public with sharing class FinancialService {
     
+    @AuraEnabled
     public static Decimal calcularParcela(Decimal valorEmprestimo, Decimal taxaJurosAnual, Integer meses){
-        
         
         if (valorEmprestimo == null || valorEmprestimo <= 0 ||
             taxaJurosAnual == null || taxaJurosAnual < 0 ||
         meses == null || meses <= 0) {
-            throw new IllegalArgumentException('Parâmetros inválidos.');
+            throw new AuraHandledException('Parâmetros inválidos.');
         }
         
         
